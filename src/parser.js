@@ -61,7 +61,7 @@ function collectPosts(data, postTypes, config) {
 				// meta data isn't written to file, but is used to help with other things
 				postMapped.meta = {
 					id: getPostId(post),
-					slug: getPostSlug(post),
+					url: getPostUrl(post),
 					coverImageId: getPostCoverImageId(post),
 					type: postType,
 					imageUrls: [],
@@ -72,8 +72,8 @@ function collectPosts(data, postTypes, config) {
 					categories: getCategories(post),
 					tags: getTags(post),
 				};
-				if (config.slug) {
-					postMapped.frontmatter.slug = getFrontmatterSlug(post);
+				if (config.url) {
+					postMapped.frontmatter.url = getFrontmatterUrl(post);
 				}
 				
 				postMapped.content = translator.getPostContent(
@@ -102,13 +102,13 @@ function getPostId(post) {
 	return post.post_id[0];
 }
 
-function getPostSlug(post) {
+function getPostUrl(post) {
 	return decodeURIComponent(post.post_name[0]);
 }
 
-function getFrontmatterSlug(post) {
+function getFrontmatterUrl(post) {
 	const url = new URL(post.link[0]);
-	return decodeURIComponent(url.pathname.replace(/\//g, ''));
+	return decodeURIComponent(url.pathname);
 }
 
 function getPostCoverImageId(post) {
