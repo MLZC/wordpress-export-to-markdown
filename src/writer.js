@@ -54,7 +54,7 @@ async function writeMarkdownFilesPromise(posts, config ) {
 		} else {
 			const payload = {
 				item: post,
-				name: (config.includeOtherTypes ? post.meta.type + ' - ' : '') + post.meta.slug,
+				name: (config.includeOtherTypes ? post.meta.type + ' - ' : '') + post.meta.url,
 				destinationPath,
 				delay
 			};
@@ -175,17 +175,18 @@ function getPostPath(post, config) {
 		pathSegments.push(dt.toFormat('LL'));
 	}
 
-	// create slug fragment, possibly date prefixed
-	let slugFragment = post.meta.slug;
+	// create title fragment, possibly date prefixed
+	// replace "/" by "|" in the path
+	let titleFragment = post.frontmatter.title.replace(/\//g, '|');
 	if (config.prefixDate) {
-		slugFragment = dt.toFormat('yyyy-LL-dd') + '-' + slugFragment;
+		titleFragment = dt.toFormat('yyyy-LL-dd') + '-' + titleFragment;
 	}
 
-	// use slug fragment as folder or filename as specified
+	// use title fragment as folder or filename as specified
 	if (config.postFolders) {
-		pathSegments.push(slugFragment, 'index.md');
+		pathSegments.push(titleFragment, 'index.md');
 	} else {
-		pathSegments.push(slugFragment + '.md');
+		pathSegments.push(titleFragment + '.md');
 	}
 
 	return path.join(...pathSegments);

@@ -46,28 +46,28 @@ const options = [
 		aliases: ['postfolders'],
 		type: 'boolean',
 		description: 'Create a folder for each post',
-		default: true
+		default: false
 	},
 	{
 		name: 'prefix-date',
 		aliases: ['prefixdate'],
 		type: 'boolean',
 		description: 'Prefix post folders/files with date',
-		default: false
+		default: true
 	},
 	{
 		name: 'save-attached-images',
 		aliases: ['saveimages'],
 		type: 'boolean',
 		description: 'Save images attached to posts',
-		default: true
+		default: false
 	},
 	{
 		name: 'save-scraped-images',
 		aliases: ['addcontentimages'],
 		type: 'boolean',
 		description: 'Save images scraped from post body content',
-		default: true
+		default: false
 	},
 	{
 		name: 'include-other-types',
@@ -76,10 +76,10 @@ const options = [
 		default: false
 	},
 	{
-		name: 'slug',
+		name: 'url',
 		type: 'boolean',
-		description: 'Set slug in front-matter based on wordpress link',
-		default: false,
+		description: 'Set url in front-matter based on wordpress link',
+		default: true,
 	},
 ];
 
